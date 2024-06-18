@@ -28,15 +28,17 @@ public class SftpScanCron {
         
             sftpRemoteFileTemplate.execute(session -> {
 
-            String remoteFilePath = "/data/cuv.json";
+            String remoteFilePath = "data/IPS_Sanitas/01/cuv.json";
 
             try{ 
                 this.inputStream = session.readRaw(remoteFilePath);
                 System.out.println("File cuv exists");
+                session.mkdir("data/IPS_Sanitas/temporal/01");
+                session.rename("data/IPS_Sanitas/01/cuv.json","data/IPS_Sanitas/temporal/01/cuv.json");
                 session.remove(remoteFilePath);
 
             }catch(Exception e){
-                System.out.println(e.getMessage());
+                System.out.println(e);
             }
             return null; 
         });
