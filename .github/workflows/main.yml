@@ -23,8 +23,8 @@ jobs:
       - name: Extract commit message
         id: version
         run: | 
-              VERSION=$(xmllint --xpath "string(//project/version)" pom.xml)
-              echo "::set-output name=version::$VERSION"
+              VERSION=$(grep -m1 -oP '(?<=<version>)[^<]+' pom.xml)
+               echo "::set-output name=version::$VERSION"
         
       - name: Extract metadata (tags, labels) for Docker
         id: meta
