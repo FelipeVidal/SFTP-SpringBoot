@@ -8,8 +8,6 @@ COPY src ./src
 
 RUN mvn clean install -DskipTests
 
-RUN chmod 755 /app/target/sfptproject-${JAR_VERSION}.jar
-
 FROM openjdk:latest
 
 COPY --from=build /app/target/sfptproject-${JAR_VERSION}.jar ./eps_unisalud.jar
