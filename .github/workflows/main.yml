@@ -3,7 +3,7 @@ name: 'Publish Docker image'
 
 on:
   push:
-    branches: ['main']
+    branches: ['']
 
 jobs:
   push_to_registry:
@@ -43,6 +43,7 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
+          buildArgs: JAR_VERSION=${{ env.VERSION }}
           push: true
           tags: felipevidalsan/sftp-springboot:${{ steps.version.outputs.version }},felipevidalsan/sftp-springboot:${{ steps.version.outputs.version }}
           labels: ${{ steps.meta.outputs.labels }}
