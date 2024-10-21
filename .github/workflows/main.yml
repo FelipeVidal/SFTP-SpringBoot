@@ -3,7 +3,7 @@ name: 'Publish Docker image'
 
 on:
   push:
-    branches: ['']
+    branches: ['main']
 
 jobs:
   push_to_registry:
@@ -23,7 +23,7 @@ jobs:
       - name: Extract commit message
         id: version
         run: | 
-              VERSION=$(awk -F'[<>]' '/<version>/{print $3; exit}' pom.xml)
+              VERSION=$(awk -F'[<>]' '/<version>/{print $6; exit}' pom.xml)
               echo "::set-output name=version::$VERSION"
         
       - name: Extract metadata (tags, labels) for Docker
